@@ -15,9 +15,7 @@
   <li> <a href="#about-the-project">About The Project</a>
   <li><a href="#built-with">Built With</a></li>
   <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#license">License</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#acknowledgments">Acknowledgments</a></li>
+    
   </ol>
 </details>
 
@@ -37,7 +35,11 @@ Per questo progetto sono stati realizzati il database e l'applicativo Java con G
 
 <!-- Contributing -->
 ## Contributing
-
+<p align="center" width="100%">
+  <img src="https://avatars.githubusercontent.com/u/147719961?v=4" width="100px;"/><br /><sub><b>Federica Fortino</b></sub><br />
+<p align="center" width="100%">
+  <img src="https://avatars.githubusercontent.com/u/147701593?v=4" width="100px;"/><br /><sub><b>Francesco Guzzetta</b></sub><br />
+</p>
 
 [contributors-shield]: https://img.shields.io/github/contributors/fedeeey/Unina-Delivery.svg?style=for-the-badge
 [contributors-url]: https://github.com/fedeeey/Unina-Delivery/graphs/contributors
