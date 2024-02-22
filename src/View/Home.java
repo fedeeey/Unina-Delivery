@@ -44,6 +44,7 @@ public class Home extends JFrame {
         desktopPane.setBackground(new Color(156, 178, 192));
         mainPanel.add(desktopPane, "cell 1 1,grow");
         desktopPane.setLayout(new BorderLayout(0, 0));
+
         
         JPanel MenuBar = new JPanel();
         MenuBar.setBackground(new Color(0, 52, 73));
