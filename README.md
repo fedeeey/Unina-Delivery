@@ -39,7 +39,10 @@ Per questo progetto sono stati realizzati il database e l'applicativo Java con G
   <img src="https://avatars.githubusercontent.com/u/147719961?v=4" width="100px;"/><br /><sub><b>Federica Fortino</b></sub><br />
 <p align="center" width="100%">
   <img src="https://avatars.githubusercontent.com/u/147701593?v=4" width="100px;"/><br /><sub><b>Francesco Guzzetta</b></sub><br />
+<p align="center" width="100%">
+  <img src="https://avatars.githubusercontent.com/u/148976556?v=4" width="100px;"/><br /><sub><b>Elisa Ferrara</b></sub><br />
 </p>
+
 
 [contributors-shield]: https://img.shields.io/github/contributors/fedeeey/Unina-Delivery.svg?style=for-the-badge
 [contributors-url]: https://github.com/fedeeey/Unina-Delivery/graphs/contributors
