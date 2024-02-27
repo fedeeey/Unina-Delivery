@@ -2,7 +2,11 @@ package Model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
 
 import Model.DBConnection.DBConnection;
 import Model.Entities.Cliente;
@@ -48,5 +52,53 @@ public class ClienteDAO {
             }
         }
 	}
+	
+	 public List<Cliente> getAllClienti() throws SQLException {
+	        List<Cliente> customers = new ArrayList<>();
+	        dbcon = DBConnection.getDBconnection();
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        try {
+	            conn = dbcon.getConnection();
+	            String query = "SELECT * FROM cliente";
+	            ps = conn.prepareStatement(query);
+	            rs = ps.executeQuery();
+	            while (rs.next()) {
+	                String emailCliente = rs.getString("email_cliente");
+	                String nTelefonoCliente = rs.getString("n_telefono_cliente");
+	                String nome = rs.getString("nome");
+	                String cognome = rs.getString("cognome");
+	                Date dataNascita = rs.getDate("data_nascita");
+	                String indirizzoPredefinito = rs.getString("indirizzo_predefinito");
+	                Cliente cliente = new Cliente(emailCliente, nTelefonoCliente, nome, cognome, dataNascita, indirizzoPredefinito);
+	                customers.add(cliente);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            if (rs != null) {
+	                try {
+	                    rs.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            if (ps != null) {
+	                try {
+	                    ps.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            if (conn != null) {
+	                try {
+	                    conn.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        return customers;
+	    }
 	
 }
