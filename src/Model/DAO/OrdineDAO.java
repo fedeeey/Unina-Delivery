@@ -11,7 +11,7 @@ public class OrdineDAO {
 	private Connection conn;
 	private DBConnection dbcon;
 	
-	public void createCliente(Ordine ordine) throws SQLException {
+	public void createOrdine(Ordine ordine) throws SQLException {
 		dbcon = DBConnection.getDBconnection();
 		PreparedStatement ps = null;
 		try {
