@@ -5,28 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import Model.DBConnection.DBConnection;
-import Model.Entities.Cliente;
+import Model.Entities.DettaglioOrdine;
 
-public class ClienteDAO {
+public class DettaglioOrdineDAO {
 	private Connection conn;
 	private DBConnection dbcon;
 	
-	public void createCliente(Cliente cliente) throws SQLException {
+	public void createCliente(DettaglioOrdine dettaglio_ordine) throws SQLException {
 		dbcon = DBConnection.getDBconnection();
 		PreparedStatement ps = null;
 		try {
             conn = dbcon.getConnection();
 
-            String query = "INSERT INTO cliente (email_cliente, n_telefono_cliente, nome, cognome, data_nascita, indirizzo_predefinito) VALUES (?, ?, ?, ?, ?, ?) RETURNING email_cliente";
+            String query = "INSERT INTO ordine (id_dettaglio, quantita) VALUES (?, ?) RETURNING id_dettaglio";
             ps = conn.prepareStatement(query);
-            ps.setString(1, cliente.getEmailCliente());
-            ps.setString(2, cliente.getnTelefonoCliente());
-            ps.setString(3, cliente.getNome());
-            ps.setString(4, cliente.getCognome());
-            //Casting a java.util.Date
-            java.sql.Date sqlDate = new java.sql.Date(cliente.getDataNascita().getTime());
-            ps.setDate(5, sqlDate);
-            ps.setString(6, cliente.getIndirizzoPredefinito());
+            ps.setInt(1, dettaglio_ordine.getIdDettaglio());
+            ps.setInt(2, dettaglio_ordine.getQuantita());
 
             ps.executeUpdate();
         } catch (SQLException e) {

@@ -5,28 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import Model.DBConnection.DBConnection;
-import Model.Entities.Cliente;
+import Model.Entities.Corriere;
 
-public class ClienteDAO {
+public class CorriereDAO {
 	private Connection conn;
 	private DBConnection dbcon;
 	
-	public void createCliente(Cliente cliente) throws SQLException {
+	public void createCorriere(Corriere corriere) throws SQLException {
 		dbcon = DBConnection.getDBconnection();
 		PreparedStatement ps = null;
 		try {
             conn = dbcon.getConnection();
 
-            String query = "INSERT INTO cliente (email_cliente, n_telefono_cliente, nome, cognome, data_nascita, indirizzo_predefinito) VALUES (?, ?, ?, ?, ?, ?) RETURNING email_cliente";
+            String query = "INSERT INTO corriere (n_telefono_corriere, nome_corriere, cognome_corriere, disponibilita) VALUES (?, ?, ?, ?) RETURNING n_telefono_cliente";
             ps = conn.prepareStatement(query);
-            ps.setString(1, cliente.getEmailCliente());
-            ps.setString(2, cliente.getnTelefonoCliente());
-            ps.setString(3, cliente.getNome());
-            ps.setString(4, cliente.getCognome());
-            //Casting a java.util.Date
-            java.sql.Date sqlDate = new java.sql.Date(cliente.getDataNascita().getTime());
-            ps.setDate(5, sqlDate);
-            ps.setString(6, cliente.getIndirizzoPredefinito());
+            ps.setString(1, corriere.getnTelefonoCorriere());
+            ps.setString(2, corriere.getNomeCorriere());
+            ps.setString(3, corriere.getCognomeCorriere());
+            ps.setBoolean(4, corriere.getDisponibilita());
 
             ps.executeUpdate();
         } catch (SQLException e) {
