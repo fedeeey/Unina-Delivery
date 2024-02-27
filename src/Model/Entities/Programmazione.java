@@ -3,14 +3,13 @@ package Model.Entities;
 import java.util.Date;
 
 public class Programmazione {
-	
 	private int idProgrammazione;
 	private Date proxConsegna;
 	private Date dataFine;
 	private String orario;
 	private String frequenza;
 	
-	public void Spedizione(int idProgrammazione, Date proxConsegna, Date dataFine, String orario, String frequenza) {
+	public Programmazione(int idProgrammazione, Date proxConsegna, Date dataFine, String orario, String frequenza) {
 		this.setIdProgrammazione(idProgrammazione);
 		this.setProxConsegna(proxConsegna);
 		this.setDataFine(dataFine);
