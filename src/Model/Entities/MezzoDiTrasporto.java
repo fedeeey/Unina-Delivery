@@ -4,14 +4,14 @@ public class MezzoDiTrasporto {
 	private String targa;
 	private Integer capacitàPeso;
 	private Integer capacitàSpazio;
-	private Boolean disponibilità;
+	private Boolean disponibilita;
 	private String modello;
 	
 	public MezzoDiTrasporto(String targa, Integer capacitàPeso, Integer capacitàSpazio, Boolean disponibilità, String modello) {
 		this.setTarga(targa);
 		this.setCapacitàPeso(capacitàPeso);
 		this.setCapacitàSpazio(capacitàSpazio);
-		this.setDisponibilità(disponibilità);
+		this.setDisponibilita(disponibilita);
 		this.setModello(modello);
 	}
 
@@ -39,12 +39,12 @@ public class MezzoDiTrasporto {
 		this.capacitàSpazio = capacitàSpazio;
 	}
 
-	public Boolean getDisponibilità() {
-		return disponibilità;
+	public Boolean getDisponibilita() {
+		return disponibilita;
 	}
 
-	public void setDisponibilità(Boolean disponibilità) {
-		this.disponibilità = disponibilità;
+	public void setDisponibilita(Boolean disponibilita) {
+		this.disponibilita = disponibilita;
 	}
 
 	public String getModello() {
