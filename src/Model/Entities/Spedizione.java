@@ -52,7 +52,7 @@ public class Spedizione {
 		this.societa = societa;
 	}
 
-	public String getStatotato() {
+	public String getStato() {
 		return stato;
 	}
 
