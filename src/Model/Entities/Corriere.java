@@ -4,13 +4,13 @@ public class Corriere {
 	private String nomeCorriere;
 	private String cognomeCorriere;
 	private String nTelefonoCorriere;
-	private Boolean disponibilità;
+	private Boolean disponibilita;
 	
 	public Corriere(String nomeCorriere, String cognomeCorriere, String nTelefonoCorriere, Boolean disponibilita) {
 		this.setNomeCorriere(nomeCorriere);
 		this.setCognomeCorriere(cognomeCorriere);
 		this.setnTelefonoCorriere(nTelefonoCorriere);
-		this.setDisponibilità(disponibilità);
+		this.setDisponibilita(disponibilita);
 	}
 
 	public String getNomeCorriere() {
@@ -37,12 +37,12 @@ public class Corriere {
 		this.nTelefonoCorriere = nTelefonoCorriere;
 	}
 
-	public Boolean getDisponibilità() {
-		return disponibilità;
+	public Boolean getDisponibilita() {
+		return disponibilita;
 	}
 
-	public void setDisponibilità(Boolean disponibilità) {
-		this.disponibilità = disponibilità;
+	public void setDisponibilita(Boolean disponibilita) {
+		this.disponibilita = disponibilita;
 	}
 
 }
