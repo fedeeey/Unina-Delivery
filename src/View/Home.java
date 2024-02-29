@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Home extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private JPanel selectedPanel; 		//Pannello selezionato
+    private JPanel selectedPanel; //Pannello selezionato
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -30,13 +30,13 @@ public class Home extends JFrame {
     	setSize(new Dimension(970, 634));
     	setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/Images/UninaIcona.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(1100, 620);
         setTitle("Home");
-
+        
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(new Color(0, 52, 73));
         mainPanel.setLayout(new MigLayout("fill, insets 0", "[419.00][468.00,grow]", "[51.00][540.00,grow]"));
-
+        
         getContentPane().add(mainPanel);
         
         JDesktopPane desktopPane = new JDesktopPane();
@@ -44,7 +44,6 @@ public class Home extends JFrame {
         desktopPane.setBackground(new Color(156, 178, 192));
         mainPanel.add(desktopPane, "cell 1 1,grow");
         desktopPane.setLayout(new BorderLayout(0, 0));
-
         
         JPanel MenuBar = new JPanel();
         MenuBar.setBackground(new Color(0, 52, 73));
@@ -76,19 +75,37 @@ public class Home extends JFrame {
         mainPanel.add(SideBar, "cell 0 0 1 2,grow");
         SideBar.setLayout(new MigLayout("", "[323.00,grow,center]", "[90.00][50.00][50.00][50.00][50.00][50.00]"));
         
-        JLabel lblLogoUnina = new JLabel("");
-        lblLogoUnina.setIcon(new ImageIcon(Home.class.getResource("/Images/UninaHome.png")));
-        SideBar.add(lblLogoUnina, "cell 0 0,alignx center,aligny center");
+        JButton logoButton = new JButton();
+        logoButton.setIcon(new ImageIcon(Home.class.getResource("/Images/UninaHome.png")));
+        logoButton.setBorderPainted(false);
+        logoButton.setContentAreaFilled(false);
+        logoButton.setFocusPainted(false);
+        logoButton.setOpaque(false);
+        logoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desktopPane.removeAll();
+                desktopPane.repaint();
+            }
+        });
+        SideBar.add(logoButton, "cell 0 0,alignx center,aligny center");
         
         JPanel ViewOrdini = new JPanel();
         ViewOrdini.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 VisualizzaOrdini visualizzaOrdiniFrame = new VisualizzaOrdini();
-                desktopPane.add(visualizzaOrdiniFrame); // Aggiungi l'internal frame al desktop pane
-                visualizzaOrdiniFrame.setVisible(true); // Rendi visibile l'internal frame
+                desktopPane.add(visualizzaOrdiniFrame);
+                visualizzaOrdiniFrame.setVisible(true);
+
+                if (selectedPanel != null) {
+                    selectedPanel.setBackground(new Color(0, 52, 73));
+                }
+                ViewOrdini.setBackground(new Color(0, 92, 133));
+                selectedPanel = ViewOrdini;
             }
         });
+        
         ViewOrdini.setBackground(new Color(0, 52, 73));
         SideBar.add(ViewOrdini, "cell 0 1,grow");
         ViewOrdini.setLayout(null);
@@ -99,6 +116,23 @@ public class Home extends JFrame {
         lblVisualizzaOrdini.setFont(new Font("Roboto", Font.BOLD, 16));
         lblVisualizzaOrdini.setBounds(10, 0, 234, 50);
         ViewOrdini.add(lblVisualizzaOrdini);
+        
+        lblVisualizzaOrdini.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                VisualizzaOrdini visualizzaOrdiniFrame = new VisualizzaOrdini();
+                desktopPane.add(visualizzaOrdiniFrame);
+                visualizzaOrdiniFrame.setVisible(true);
+
+                if (selectedPanel != null) {
+                    selectedPanel.setBackground(new Color(0, 52, 73));
+                }
+                ViewOrdini.setBackground(new Color(0, 92, 133));
+                selectedPanel = ViewOrdini;
+
+                lblVisualizzaOrdini.setForeground(Color.WHITE);
+            }
+        });
         
         JPanel CreateSped = new JPanel();
         CreateSped.addMouseListener(new MouseAdapter() {
@@ -180,25 +214,12 @@ public class Home extends JFrame {
         lblStatistiche.setBounds(10, 0, 234, 50);
         ViewStats.add(lblStatistiche);
         
-        //MouseListener usato per modificare il colore quando selezioniamo nel menu
-        addMouseListenerToComponent(lblVisualizzaOrdini, ViewOrdini);
-        addMouseListenerToComponent(lblCreaSpedizione, CreateSped);
-        addMouseListenerToComponent(lblProgrammaSpedizione, ProgSped);
-        addMouseListenerToComponent(lblVisualizzaSpedizioniProgrammate, ViewSpedProg);
-        addMouseListenerToComponent(lblStatistiche, ViewStats);
-    }
-    
-    //Metodo per aggiungere il MouseListener a un component
-    private void addMouseListenerToComponent(Component component, JPanel panel) {
-        component.addMouseListener(new MouseAdapter() {
-        @Override
-            public void mousePressed(MouseEvent e) {
-                if (selectedPanel != null) {
-                    selectedPanel.setBackground(new Color(0, 52, 73));
-                }
-                panel.setBackground(new Color(0, 92, 133));
-                selectedPanel = panel;
-            }
-        });
+        // Calcola il centro dello schermo
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (screenSize.width - getWidth()) / 2;
+        int centerY = (screenSize.height - getHeight()) / 2;
+
+        // Setta la posizione della finestra
+        setLocation(centerX, centerY);
     }
 }
