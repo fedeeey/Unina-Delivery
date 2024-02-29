@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JTextField;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -61,6 +63,7 @@ public class Login extends JFrame {
 		setTitle("UninaDelivery");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 933, 547);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -166,5 +169,13 @@ public class Login extends JFrame {
 		btnSignUp.setBackground(new Color(156, 178, 192));
 		btnSignUp.setBounds(264, 320, 124, 34);
 		panelDX.add(btnSignUp);
+		
+		// Calcola il centro dello schermo
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (screenSize.width - getWidth()) / 2;
+        int centerY = (screenSize.height - getHeight()) / 2;
+
+        // Setta la posizione della finestra
+        setLocation(centerX, centerY);
 	}
 }

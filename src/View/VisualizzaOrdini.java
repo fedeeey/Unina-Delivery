@@ -14,6 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.plaf.InternalFrameUI;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.JScrollPane;
+
 
 public class VisualizzaOrdini extends JInternalFrame {
 
@@ -54,7 +58,7 @@ public class VisualizzaOrdini extends JInternalFrame {
 		JPanel MainBar = new JPanel();
 		MainBar.setBackground(new Color(156, 178, 192));
 		panel.add(MainBar, "cell 0 0,grow");
-		MainBar.setLayout(new MigLayout("", "[148.00][82.00][41.00][][][189.00][]", "[grow][grow][]"));
+		MainBar.setLayout(new MigLayout("", "[221.00][82.00][41.00][][][189.00][]", "[grow][grow][]"));
 		
 		JTextArea txtrVisualizzaOrdini = new JTextArea();
 		txtrVisualizzaOrdini.setEditable(false);
@@ -73,9 +77,19 @@ public class VisualizzaOrdini extends JInternalFrame {
 		MainBar.add(txtrInizio, "cell 0 1,grow");
 		
 		startDateChooser = new JDateChooser(); // Crea un JDateChooser per la data di inizio
+		startDateChooser.getCalendarButton().setIcon(new ImageIcon(VisualizzaOrdini.class.getResource("/Images/icons8-calendario-15.png")));
         MainBar.add(startDateChooser, "cell 0 2,growx");
         
-        endDateChooser = new JDateChooser(); // Crea un JDateChooser per la data di fine
+        JTextArea txtrA = new JTextArea();
+        txtrA.setEditable(false);
+        txtrA.setForeground(new Color(255, 255, 255));
+		txtrA.setFont(new Font("Roboto", Font.BOLD, 14));
+		txtrA.setText("a");
+		txtrA.setBackground(new Color(156, 178, 192));
+		MainBar.add(txtrA, "cell 0 2,alignx center,aligny center");
+        
+        endDateChooser = new JDateChooser();
+        endDateChooser.getCalendarButton().setIcon(new ImageIcon(VisualizzaOrdini.class.getResource("/Images/icons8-calendario-15.png")));
         MainBar.add(endDateChooser, "cell 0 2,growx");
 		
 		JTextArea txtrFiltraPerEmail = new JTextArea();
@@ -95,18 +109,26 @@ public class VisualizzaOrdini extends JInternalFrame {
 		btnFiltra.setBackground(new Color(0, 52, 73));
 		MainBar.add(btnFiltra, "cell 6 2");
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Email", "Nome", "Cognome", "Id Ordine", "Data Ordine"
-			}
-		));
-		table.setFont(new Font("Roboto", Font.PLAIN, 12));
-		table.setBackground(new Color(185, 200, 210));
-		table.setBorder(null);
-		panel.add(table, "cell 0 1 1 2,grow");
+		JScrollPane scrollPane = new JScrollPane();
+        panel.add(scrollPane, "cell 0 1,grow");
+
+
+        table = new JTable();
+        scrollPane.setViewportView(table);
+        table.setModel(new DefaultTableModel(
+            new Object[][] {
+            },
+            new String[] {
+                "Email", "Nome", "Cognome", "Id Ordine", "Data Ordine"
+            }
+        ));
+        table.setFont(new Font("Roboto", Font.PLAIN, 12));
+        table.setBackground(new Color(185, 200, 210));
+        table.setBorder(null);
+
+		InternalFrameUI ifu = this.getUI();
+        ((BasicInternalFrameUI)ifu).setNorthPane(null);
+        this.setBorder(null);
 
 	}
 
