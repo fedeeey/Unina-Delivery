@@ -86,4 +86,50 @@ public class OperatoreDAO {
 	    }
 	    return operatore;
 	}
-}
+	public Operatore getOperatoreByEmailPassword(String email, String password) {
+		 Operatore operatore = null;
+		    PreparedStatement ps = null;
+		    ResultSet rs = null;
+		    
+		    try {
+		        conn = dbcon.getConnection();
+		        String query = "SELECT * FROM operatore WHERE email_operatore = ?, password = ?";
+		        ps = conn.prepareStatement(query);
+		        ps.setString(1, email);
+		        ps.setString(2, password);
+		        rs = ps.executeQuery();
+		        
+		        if (rs.next()) {
+		            operatore = new Operatore(rs.getString("email_operatore"), rs.getString("password"), rs.getString("nome_operatore"), rs.getString("cognome_operatore"), rs.getString("n_telefono_operatore"));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		    	if (rs != null) {
+		            try {
+		                rs.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		        if (ps != null) {
+		            try {
+		                ps.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		        if (conn != null) {
+		            try {
+		                conn.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		    }
+		    return operatore;
+		}
+		        
+	}
+		    
+
