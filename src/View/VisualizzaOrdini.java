@@ -58,14 +58,14 @@ public class VisualizzaOrdini extends JInternalFrame {
 		JPanel MainBar = new JPanel();
 		MainBar.setBackground(new Color(156, 178, 192));
 		panel.add(MainBar, "cell 0 0,grow");
-		MainBar.setLayout(new MigLayout("", "[221.00][82.00][41.00][][][189.00][]", "[grow][grow][]"));
+		MainBar.setLayout(new MigLayout("", "[221.00][82.00][41.00][][][189.00][]", "[grow][11.00,grow][]"));
 		
 		JTextArea txtrVisualizzaOrdini = new JTextArea();
 		txtrVisualizzaOrdini.setEditable(false);
 		txtrVisualizzaOrdini.setForeground(new Color(0, 52, 73));
 		txtrVisualizzaOrdini.setBackground(new Color(156, 178, 192));
-		txtrVisualizzaOrdini.setText("Visualizza Ordini");
-		txtrVisualizzaOrdini.setFont(new Font("Tahoma", Font.BOLD, 24));
+		txtrVisualizzaOrdini.setText("Lista Ordini");
+		txtrVisualizzaOrdini.setFont(new Font("Segoe UI Black", Font.PLAIN, 24));
 		MainBar.add(txtrVisualizzaOrdini, "cell 0 0,grow");
 		
 		JTextArea txtrInizio = new JTextArea();
