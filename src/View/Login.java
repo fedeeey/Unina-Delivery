@@ -6,31 +6,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JTextField;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.border.LineBorder;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import javax.swing.JSlider;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.Toolkit;
+import Controller.Login.LoginController;
+import javax.swing.JOptionPane;
 
 public class Login extends JFrame {
 
@@ -38,6 +29,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtEmail;
 	private JPasswordField passwordField;
+	private LoginController loginController;
 
 	/**
 	 * Launch the application.
@@ -69,7 +61,7 @@ public class Login extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		loginController = new LoginController();
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 240, 240));
 		panel.setBounds(0, 0, 917, 508);
@@ -99,7 +91,7 @@ public class Login extends JFrame {
 		txtEmail.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				email.setText("");
+				txtEmail.setText("");
 			}
 		});
 		txtEmail.setToolTipText("");
@@ -113,7 +105,7 @@ public class Login extends JFrame {
 		passwordField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				password.setText("");
+				passwordField.setText("");
 			}
 		});
 		passwordField.setToolTipText("");
@@ -147,14 +139,29 @@ public class Login extends JFrame {
 		btnSignIn.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnSignIn.setBackground(new Color(156, 178, 192));
 		btnSignIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				Home homeFrame = new Home();
-				homeFrame.setVisible(true);
-			}
-		});
+            public void actionPerformed(ActionEvent e) {
+                // Ottieni l'email e la password inserite dall'utente
+                String email = txtEmail.getText();
+                String password = new String(passwordField.getPassword());
+
+                // Effettua l'autenticazione utilizzando il controller
+                if (loginController.authenticate(email, password)) {
+                    // Se l'autenticazione ha successo, apri la finestra Home
+                    Home homeFrame = new Home();
+                    homeFrame.setVisible(true);
+
+                    // Chiudi la finestra di login
+                    dispose();
+                } else {
+                    // Se l'autenticazione fallisce, mostra un messaggio di errore
+                    JOptionPane.showMessageDialog(Login.this, "Email o password non valide", "Errore di autenticazione", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 		btnSignIn.setBounds(70, 320, 124, 34);
 		panelDX.add(btnSignIn);
+		
+
 		
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addActionListener(new ActionListener() {
@@ -178,4 +185,7 @@ public class Login extends JFrame {
         // Setta la posizione della finestra
         setLocation(centerX, centerY);
 	}
+	public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
 }
